@@ -4,10 +4,11 @@ const app = require("express")();
 const jwt = require('jsonwebtoken');
 const http = require("http").Server(app);
 const io = require('socket.io')(http);
+const cors = require('cors');
 
 const admin = io.of('/admin');
 const manager = io.of('/manager');
-
+app.use(cors());
 
 app.get('/api/admin', (req,res)=> {
     admin.emit('authenticated', 'Server sent a message to admin');
@@ -18,6 +19,41 @@ app.get('/api/manager', (req,res)=> {
     manager.emit('authenticated', 'Server sent a message to manager');
     res.json({Data:"Manger"});
 });
+
+app.get('/api/gubor', (req,res)=> {
+    res.json({
+        slides:[
+            {
+                shareable: "public",
+                title: "Product Management",
+                slides: "20",
+                edited: "20 Oct 2020",
+                created: "1 Oct 2020",
+            },
+            {
+                shareable: "private",
+                title: "Product Management2",
+                slides: "200",
+                edited: "21 Oct 2020",
+                created: "1 Oct 2020",
+            },
+            {
+                shareable: "public",
+                title: "Product Management2",
+                slides: "2",
+                edited: "12 Oct 2020",
+                created: "2 Oct 2020",
+            },
+            {
+                shareable: "private",
+                title: "Product Management4",
+                slides: "5",
+                edited: "12 Oct 2020",
+                created: "2 Oct 2020",
+            }
+        ]
+    })
+})
 
 
 // admin.on('connection', (socket) => {
