@@ -15,11 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "role_id"
       })
       this.belongsToMany(models.Product, {
-        foreignKey: "product_ids"
-      })
-
-      this.belongsToMany(models.Groups, {
-        through: 'ItemUser',
+        through: 'UserProduct',
+        as: 'products',
         foreignKey: 'userId'
       });
     }

@@ -28,8 +28,9 @@ module.exports = {
           model: "Roles",
           key: "id",
           as: "role_id",
-        },
+        }
       }
+
     });
   },
   down: async (queryInterface, Sequelize) => {

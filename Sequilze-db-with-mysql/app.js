@@ -6,7 +6,7 @@ const app = require('express')();
 
 // const User = require('./models/user')(sequelize, Sequelize.DataTypes);
 // const Role = require('./models/role')(sequelize, Sequelize.DataTypes);
-const { User,Role } = require('./models/index');
+const { User,Role,Product } = require('./models/index');
 
 app.get('/api/getdata',async (req,res)=> {
     // console.log(Test3.sequelize.options.database);
@@ -14,7 +14,8 @@ app.get('/api/getdata',async (req,res)=> {
 
     const data = await User.findAll({
         include: [ { 
-            model: Role
+            model: Product,
+            as:'products'
         } ]
     })
     res.json({ 'data': data });
